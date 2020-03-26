@@ -47,7 +47,7 @@ var LinkedList = function () {
 
     return find(list.head, target);
 
-  //old code:
+    //old code:
     // var result = false;
     // var currNode = list.head;
     // for (var i = 0; i < list.size; i++) {
