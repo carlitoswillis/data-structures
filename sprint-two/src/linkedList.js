@@ -23,8 +23,15 @@ var LinkedList = function () {
     }
     list.size++;
   };
-
+  // .removeHead() method, removes the first node from the list and returns its value
   list.removeHead = function () {
+    if (list.head === null) {
+      return undefined;
+    }
+    var value = list.head.value;
+    var second = list.head.next;
+    list.head = second;
+    return value;
   };
 
   list.contains = function (target) {
@@ -38,7 +45,7 @@ var Node = function (value) {
 
   node.value = value;
   node.next = null;
-  node.prev = null;
+  // node.prev = null;
 
   return node;
 };
