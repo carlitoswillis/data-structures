@@ -1,29 +1,44 @@
 var Queue = function () {
   var someInstance = {};
-  someInstance.counter = 0;
+  var counter = 0;
+  var length = 0;
+  var lowerIndex = 0;
+  // refactor with lowerindex
 
   // Use an object with numeric keys to store values
   var storage = {};
-  someInstance.storage = storage;
 
   // Implement the methods below
 
   someInstance.enqueue = function (value) {
 
-    someInstance.storage[someInstance.counter] = value;
-    someInstance.counter++;
+    storage[counter] = value;
+    counter++;
+    length++;
 
   };
 
   someInstance.dequeue = function () {
-    var key = Object.keys(storage)[0];
-    var dequeued = storage[key];
-    delete storage[key];
+
+    var dequeued;
+    var cnt = 0;
+    for (var value in storage) {
+      if (cnt === 0) {
+        dequeued = storage[value];
+        delete storage[value];
+      }
+      cnt++;
+    }
+
+    if (length > 0) {
+      length--;
+      lowerIndex++;
+    }
     return dequeued;
   };
 
   someInstance.size = function () {
-    return Object.keys(someInstance.storage).length;
+    return length;
   };
 
   return someInstance;
