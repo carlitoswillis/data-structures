@@ -69,6 +69,9 @@ var Node = function (value) {
   node.next = null;
   node.prev = null;
 
+  // for graphs
+  node.edges = [];
+
   return node;
 };
 

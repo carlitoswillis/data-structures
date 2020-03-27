@@ -2,7 +2,7 @@
 
 var HashTable = function() {
   this._limit = 8;
-  this._storage = LimitedArray(this._limit);
+  this._storage = LimitedArray(this._limit); // maybe store another array with list of keys so far
 };
 
 HashTable.prototype.insert = function(k, v) {
