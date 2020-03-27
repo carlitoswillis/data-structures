@@ -25,6 +25,9 @@ Graph.prototype.addNode = function(num) {
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(num) {
   // return this.values.includes(num);
+  if (this.vertices.length === 0 ) {
+    return false;
+  }
   return this.vertices.map(z => z.num === num).reduce((x, y) => x || y);
 };
 
@@ -33,8 +36,10 @@ Graph.prototype.removeNode = function(num) {
   var index = this.values.indexOf(num);
   //remove edges from nodes that are connected
   for (var i = 0; i < this.vertices.length; i++) {
-    if (this.hasEdge(this.vertices[i], this.vertices[index])) {
-      this.removeEdge(this.vertices[i], this.vertices[index]);
+
+    // skip over self
+    if (this.hasEdge(this.vertices[i].num, this.vertices[index].num)) {
+      this.removeEdge(this.vertices[i].num, this.vertices[index].num);
     }
   }
   // and / or remove connections from this.connected
@@ -43,17 +48,26 @@ Graph.prototype.removeNode = function(num) {
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
+
+Graph.prototype.getVertex = function(num) {
+  var result;
+  for (var vertex of this.vertices) {
+    if (vertex.num === num) {
+      result = vertex;
+    }
+  }
+  return result;
+};
+
+
 Graph.prototype.hasEdge = function(fromNode, toNode) {
 
   var result = false;
-  for (var vertex of this.vertices) {
-    if (vertex.num === fromNode) {
-      fromNode = vertex;
-    }
-  }
 
-  for (var node of fromNode.edges) {
-    result = result || (node.num === toNode);
+  fromNode = this.getVertex(fromNode);
+
+  for (var i = 0; i < fromNode.edges.length; i++) {
+    result = result || (fromNode.edges[i].num === toNode);
   }
 
   return result;
@@ -64,17 +78,8 @@ Graph.prototype.addEdge = function(fromNodeValue, toNodeValue) {
 
   var fromNode, toNode;
 
-  for (var vertex of this.vertices) {
-    if (vertex.num === fromNodeValue) {
-      fromNode = vertex;
-    }
-  }
-
-  for (var vertex of this.vertices) {
-    if (vertex.num === toNodeValue) {
-      toNode = vertex;
-    }
-  }
+  fromNode = this.getVertex(fromNodeValue);
+  toNode = this.getVertex(toNodeValue);
 
   fromNode.edges.push(toNode);
   toNode.edges.push(fromNode);
@@ -82,10 +87,24 @@ Graph.prototype.addEdge = function(fromNodeValue, toNodeValue) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+  fromNode = this.getVertex(fromNode);
+  toNode = this.getVertex(toNode);
+
+  toNode.edges.splice(toNode.edges.indexOf(fromNode), 1);
+  fromNode.edges.splice(fromNode.edges.indexOf(toNode), 1);
+
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  this.vertices.map((node) => cb(node.num));
+
+  // for (var i = 0; i < this.vertices.length; i++) {
+  //   cb(this.vertices[i].num);
+  // }
+
+  // low key
+
 };
 
 /*
