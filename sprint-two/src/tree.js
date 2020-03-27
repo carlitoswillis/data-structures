@@ -15,7 +15,15 @@ treeMethods.addChild = function(value) {
 };
 // .contains() method, takes any input and returns a boolean reflecting whether it can be found as the value of the target node or any descendant node
 treeMethods.contains = function(target) {
+  var result = false;
+  if (this.value === target) {
+    return true;
+  }
+  _.each(this.children, function(child) {
+    result = result || child.contains(target);
+  });
 
+  return result;
 };
 
 
