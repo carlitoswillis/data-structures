@@ -1,6 +1,7 @@
 var Set = function() {
   var set = Object.create(setPrototype);
   set._storage = {};
+  set.size = 0;
   return set;
 };
 
@@ -8,6 +9,7 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   this._storage[item] = true;
+  this.size++;
 };
 
 setPrototype.contains = function(item) {
@@ -17,6 +19,7 @@ setPrototype.contains = function(item) {
 setPrototype.remove = function(item) {
   var result = this._storage[item];
   delete this._storage[item];
+  this.size--;
   return result;
 };
 

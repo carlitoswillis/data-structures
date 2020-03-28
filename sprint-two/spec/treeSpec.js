@@ -51,7 +51,6 @@ describe('tree', function() {
     tree.children[1].children[0].addChild(26);
     tree.removeSubtree(8);
     expect(tree.contains(26)).to.equal(false);
-    console.log(tree);
   });
 
 });
