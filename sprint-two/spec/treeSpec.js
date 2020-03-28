@@ -41,4 +41,17 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should return false for a value that was added and then removed', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    tree.children[1].addChild(9);
+    tree.children[1].children[1].addChild(49);
+    tree.children[1].children[0].addChild(26);
+    tree.removeSubtree(8);
+    expect(tree.contains(26)).to.equal(false);
+    console.log(tree);
+  });
+
 });

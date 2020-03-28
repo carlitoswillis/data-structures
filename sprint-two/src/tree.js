@@ -26,6 +26,20 @@ treeMethods.contains = function(target) {
   return result;
 };
 
+treeMethods.removeSubtree = function (value) {
+
+  var index = this.children.map(tree => tree.value).indexOf(value);
+
+  if (index !== -1) {
+    this.children.splice(index, 1);
+  } else {
+    for (var i = 0; i < this.children.length; i++) {
+      this.children[i].removeSubtree(value);
+    }
+  }
+
+};
+
 
 
 /*

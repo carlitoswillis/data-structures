@@ -52,4 +52,11 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should be sort of doubly linked and keep track of previous', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.addToTail(6);
+    linkedList.removeHead();
+    expect(linkedList.head.next.prev.value).to.equal(linkedList.head.value);
+  });
 });
