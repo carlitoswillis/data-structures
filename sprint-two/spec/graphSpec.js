@@ -68,4 +68,17 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+  it('should get the vertex with the passed in value', function() {
+    var node4 = graph.addNode(4);
+    graph.addNode(5);
+    graph.addEdge(5, 4);
+    graph.addNode(1);
+    graph.addNode(3);
+    var gotVertex = graph.getVertex(4);
+    expect(typeof graph.getVertex(4)).to.equal('object');
+    expect(gotVertex.value).to.equal();
+    expect(graph.hasEdge(gotVertex.num, 5)).to.equal(true);
+    expect(gotVertex).to.eql(node4);
+
+  });
 });

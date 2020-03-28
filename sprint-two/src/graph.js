@@ -20,6 +20,7 @@ Graph.prototype.addNode = function(num) {
   var newVertex = new Vertex(num);
   this.vertices.push(newVertex);
   this.values.push(num);
+  return newVertex;
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -59,7 +60,6 @@ Graph.prototype.getVertex = function(num) {
   return result;
 };
 
-
 Graph.prototype.hasEdge = function(fromNode, toNode) {
 
   var result = false;
@@ -98,13 +98,10 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   this.vertices.map((node) => cb(node.num));
-
   // for (var i = 0; i < this.vertices.length; i++) {
   //   cb(this.vertices[i].num);
   // }
-
   // low key
-
 };
 
 /*
