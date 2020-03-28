@@ -6,6 +6,7 @@ var BinarySearchTree = function(value) {
   tree.left;
   tree.right;
   tree.arr = [value];
+  tree.size = 0;
 
 
   return tree;
@@ -19,9 +20,8 @@ var BinarySearchTreeMethods = {};
 
 BinarySearchTreeMethods.insert = function (value) {
 
+  this.size++;
   this.arr.push(value);
-
-
   var insertHelper = function (tree, val) {
     if (val > tree.value) {
 
